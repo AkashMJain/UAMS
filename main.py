@@ -33,8 +33,18 @@ class CNNOperation(object):
             # frame = window[sY - 10:eY + 10, sX - 10:eX + 10]
 
             temp = frame[startY - 10:endY + 10, startX - 10:endX + 10]
+
             faces.append(temp)
+
         return frame
+
+
+class MathematicalCalculationDLIB(object):
+    """docstring for MathematicalCalculationDLIB"""
+
+    def __init__(self):
+        super(MathematicalCalculationDLIB, self).__init__()
+        # self.arg = arg
 
 
 class UAMS(object):
@@ -69,6 +79,10 @@ class UAMS(object):
         fps.stop()
         print("elapsed time : {:.2f}".format(fps.elapsed()))
         print("FPS  : {:.2f}".format(fps.fps()))
+        while True:
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord("q"):
+                break
 
     def __init__(self):
         super(UAMS, self).__init__()
@@ -77,6 +91,7 @@ class UAMS(object):
         self.cnn_op = CNNOperation()
 
         self.UAMS()
+
 
         # print("\nJello")
 UAMS()

@@ -38,8 +38,9 @@ class UAMS(object):
                 self.frame, startX, startY, endX, endY, self.faces, conf = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
 
                 try:
-                    # msg = self.calculation()
-                    text = "{:.2f}%".format(conf * 100) + self.calculation()
+                    msg = self.calculation()
+
+                    # text = "{:.2f}%".format(conf * 100) + self.calculation()
                 except Exception as e:
                     print(e)
 
@@ -47,9 +48,9 @@ class UAMS(object):
                 self.CTR = 0
             else:
                 self.CTR = self.CTR + 1
-
+            text = "hi there"
             # if CTR == 5:
-
+            cv2.putText(self.frame, text, (startX, startY), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
             cv2.imshow("frame", self.frame)
             fps.update()
             key = cv2.waitKey(1) & 0xFF
@@ -66,26 +67,36 @@ class UAMS(object):
         #     if key == ord("q"):
         #         break
     def calculation(self):
+        arrayOfStrings = []
         for i in range(len(self.faces)):
             face, val = self.mcdObj.loopOperation(self.faces[i])
             # print("FACE ID : " + str(i) + " value is : " + str(val))
+            # self.face.append(face)
+            # for i in range(self.faces):
             cv2.imshow("face-array" + str(i), face)
+            # print("Number of faces :- " + str(len(self.faces)))
 
-            if val == 2:
+            var = self.conditions(val)
+            arrayOfStrings.append(var)
+        print(arrayOfStrings)
+        return arrayOfStrings
+
+    def conditions(self, val):
+        if val == 2:
                 # print("FACE ID : " + str(i) + " UN-ATTENTIVE WITH YAWNING")
-                return "UN-ATTENTIVE WITH YAWNING"
-
-            elif val == 1:
-                # print("FACE ID : " + str(i) + " UN-ATTENTIVE WITH EYES CLOSED")
-                return "UN-ATTENTIVE WITH EYES CLOSED"
-            else:
-                # print("UNDETECTED")
-                return "UNDETECTED"
+            return "UN-ATTENTIVE WITH YAWNING"
+        elif val == 1:
+            # print("FACE ID : " + str(i) + " UN-ATTENTIVE WITH EYES CLOSED")
+            return "UN-ATTENTIVE WITH EYES CLOSED"
+        else:
+            # print("UNDETECTED")
+            return "UNDETECTED"
 
     def __init__(self):
         super(UAMS, self).__init__()
         self.argument_init()
-        self.CTR = 0
+        # self.arrayOfStrings = []
+        self.CTR = 5
         self.net = cv2.dnn.readNetFromCaffe(self.args["prototxt"], self.args["weights"])
         self.mcdObj = mcd.MathematicalCalculationDLIB()
         self.cnn_op = cnn.CNNOperation()

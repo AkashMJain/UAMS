@@ -6,7 +6,7 @@ import imutils
 import time
 import cv2
 import CNNOperation as cnn
-import MathematicalCalculationDLIB as mdl
+import MathematicalCalculationDLIB as mcd
 
 
 class UAMS(object):
@@ -33,8 +33,24 @@ class UAMS(object):
             self.frame = imutils.resize(frame, width=500)
             gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
             gray = np.dstack([gray, gray, gray])
-            frame = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
-            cv2.imshow("frame", frame)
+
+            if self.CTR == 5:
+                self.frame, startX, startY, endX, endY, self.faces, conf = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
+
+                try:
+                    # msg = self.calculation()
+                    text = "{:.2f}%".format(conf * 100) + self.calculation()
+                except Exception as e:
+                    print(e)
+
+                # self.calculation()
+                self.CTR = 0
+            else:
+                self.CTR = self.CTR + 1
+
+            # if CTR == 5:
+
+            cv2.imshow("frame", self.frame)
             fps.update()
             key = cv2.waitKey(1) & 0xFF
             if key == ord("q"):
@@ -42,20 +58,39 @@ class UAMS(object):
         fps.stop()
         print("elapsed time : {:.2f}".format(fps.elapsed()))
         print("FPS  : {:.2f}".format(fps.fps()))
-        while True:
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord("q"):
-                break
+
+        # For images un comment followings
+
+        # while True:
+        #     key = cv2.waitKey(1) & 0xFF
+        #     if key == ord("q"):
+        #         break
+    def calculation(self):
+        for i in range(len(self.faces)):
+            face, val = self.mcdObj.loopOperation(self.faces[i])
+            # print("FACE ID : " + str(i) + " value is : " + str(val))
+            cv2.imshow("face-array" + str(i), face)
+
+            if val == 2:
+                # print("FACE ID : " + str(i) + " UN-ATTENTIVE WITH YAWNING")
+                return "UN-ATTENTIVE WITH YAWNING"
+
+            elif val == 1:
+                # print("FACE ID : " + str(i) + " UN-ATTENTIVE WITH EYES CLOSED")
+                return "UN-ATTENTIVE WITH EYES CLOSED"
+            else:
+                # print("UNDETECTED")
+                return "UNDETECTED"
 
     def __init__(self):
         super(UAMS, self).__init__()
         self.argument_init()
+        self.CTR = 0
         self.net = cv2.dnn.readNetFromCaffe(self.args["prototxt"], self.args["weights"])
+        self.mcdObj = mcd.MathematicalCalculationDLIB()
         self.cnn_op = cnn.CNNOperation()
 
         self.UAMS()
 
         # print("\nJello")
-
-
 UAMS()

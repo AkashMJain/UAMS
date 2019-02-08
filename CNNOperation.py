@@ -38,4 +38,5 @@ class CNNOperation(object):
             # cv2.imshow("frame", temp)
             faces.append(temp)
 
-        return frame, startX, startY, endX, endY, faces, conf
+        # return frame, startX, startY, endX, endY, faces, conf, detection.shape[2]
+        return frame, faces, conf, detection, startX, y

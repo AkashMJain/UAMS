@@ -35,12 +35,15 @@ class UAMS(object):
             gray = np.dstack([gray, gray, gray])
 
             if self.CTR == 5:
-                self.frame, startX, startY, endX, endY, self.faces, conf = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
-
+                # self.frame, startX, startY, endX, endY, self.faces, conf, detection = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
+                self.frame, self.faces, conf, detection, startX, y = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
                 try:
-                    msg = self.calculation()
+                    msg = self.calculation(startX, y)
+                    # for i in range(0, detection.shape[2]):
+                    # text = "{:.2f}%".format(conf * 100) + str(msg[i])
+                    # cv2.putText(self.frame, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
+                    # y = sY - 10 if sY - 10 > 10 else sY + 10
 
-                    # text = "{:.2f}%".format(conf * 100) + self.calculation()
                 except Exception as e:
                     print(e)
 
@@ -48,9 +51,9 @@ class UAMS(object):
                 self.CTR = 0
             else:
                 self.CTR = self.CTR + 1
-            text = "hi there"
+            # text = "hi there"
             # if CTR == 5:
-            cv2.putText(self.frame, text, (startX, startY), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
+            # cv2.putText(self.frame, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
             cv2.imshow("frame", self.frame)
             fps.update()
             key = cv2.waitKey(1) & 0xFF
@@ -66,13 +69,14 @@ class UAMS(object):
         #     key = cv2.waitKey(1) & 0xFF
         #     if key == ord("q"):
         #         break
-    def calculation(self):
+    def calculation(self, startX, y):
         arrayOfStrings = []
         for i in range(len(self.faces)):
             face, val = self.mcdObj.loopOperation(self.faces[i])
             # print("FACE ID : " + str(i) + " value is : " + str(val))
             # self.face.append(face)
             # for i in range(self.faces):
+            # cv2.putText(self.fr, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
             cv2.imshow("face-array" + str(i), face)
             # print("Number of faces :- " + str(len(self.faces)))
 
@@ -102,6 +106,7 @@ class UAMS(object):
         self.cnn_op = cnn.CNNOperation()
 
         self.UAMS()
+
 
         # print("\nJello")
 UAMS()

@@ -65,7 +65,7 @@ class MathematicalCalculationDLIB(object):
 
     def loopOperation(self, frame):
         self.gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+        cv2.imshow("test", self.gray)
         rects = self.detector(self.gray, 0)
 
         for rect in rects:

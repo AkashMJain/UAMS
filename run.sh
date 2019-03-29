@@ -1,4 +1,5 @@
 
+source $PWD'/opencv/bin/activate'
 
 proto=$PWD'/caffe/deploy.prototxt.txt'
 echo $proto

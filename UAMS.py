@@ -29,8 +29,9 @@ class UAMS(object):
 
         while video_file.more():
 
-            frame = video_file.read()
-            self.frame = imutils.resize(frame, width=500)
+            self.frame = video_file.read()
+            # self.frame = imutils.resize(frame, width=500)
+            cv2.imshow("testing", self.frame)
             gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
             gray = np.dstack([gray, gray, gray])
 
@@ -94,7 +95,7 @@ class UAMS(object):
             return "UN-ATTENTIVE WITH EYES CLOSED"
         else:
             # print("UNDETECTED")
-            return "UNDETECTED"
+            return "ATTENTIVE"
 
     def __init__(self):
         super(UAMS, self).__init__()

@@ -29,33 +29,48 @@ class UAMS(object):
 
         while video_file.more():
 
-            self.frame = video_file.read()
-            # self.frame = imutils.resize(frame, width=500)
-            cv2.imshow("testing", self.frame)
-            gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
-            gray = np.dstack([gray, gray, gray])
+            try:
+                self.frame = video_file.read()
+                # self.frame = imutils.resize(frame, width=500)
+                cv2.imshow("testing", self.frame)
+                gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
+                gray = np.dstack([gray, gray, gray])
 
-            if self.CTR == 5:
+            except Exception as e:
+                print(e)
+
+            # self.frame = video_file.read()
+            # # self.frame = imutils.resize(frame, width=500)
+            # cv2.imshow("testing", self.frame)
+            # gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
+            # gray = np.dstack([gray, gray, gray])
+
+            # if self.CTR == 5:
                 # self.frame, startX, startY, endX, endY, self.faces, conf, detection = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
-                self.frame, self.faces, conf, detection, startX, y = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
-                try:
-                    msg = self.calculation(startX, y)
-                    # for i in range(0, detection.shape[2]):
-                    # text = "{:.2f}%".format(conf * 100) + str(msg[i])
-                    # cv2.putText(self.frame, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
-                    # y = sY - 10 if sY - 10 > 10 else sY + 10
+            self.frame, self.faces, conf, detection, startX, y = self.cnn_op.CNNOperation(self.frame, self.net, self.args)
+            try:
+                msg = self.calculation(startX, y)
+                # for i in range(0, detection.shape[2]):
+                # text = "{:.2f}%".format(conf * 100) + str(msg[i])
+                # cv2.putText(self.frame, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
+                # y = sY - 10 if sY - 10 > 10 else sY + 10
 
-                except Exception as e:
-                    print(e)
+            except Exception as e:
+                print(e)
 
                 # self.calculation()
-                self.CTR = 0
-            else:
-                self.CTR = self.CTR + 1
+                # self.CTR = 0
+            # else:
+                # self.CTR = self.CTR + 1
             # text = "hi there"
             # if CTR == 5:
             # cv2.putText(self.frame, text, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 0), 2)
-            cv2.imshow("frame", self.frame)
+            try:
+                cv2.imshow("frame", self.frame)
+            except Exception as e:
+                print(e)
+
+            # cv2.imshow("frame", self.frame)
             fps.update()
             key = cv2.waitKey(1) & 0xFF
             if key == ord("q"):
@@ -107,7 +122,6 @@ class UAMS(object):
         self.cnn_op = cnn.CNNOperation()
 
         self.UAMS()
-
 
         # print("\nJello")
 UAMS()

@@ -6,18 +6,37 @@
 ## Problem Definition
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ﬂow of the proposed system is shown in Fig. 1, First UAMS picks video or image as the input ﬁle, resize it into 300x300 resolution and passes to the caﬀe model. Caﬀe model converts it into Blob which is a collection of binary data stored as a single entity and tries to identify face region and store it into face array and passes to the UAMS. UAMS passes this array to the Dlib. Dlib is a general purpose cross-platform software library written in the programming language C++ which contains HOG+ SVM. Using HOG+ SVM Dlib maps 68-face coordinates on extracted faces. With the help of this left and right eye, mouth region is identiﬁed. Using Euclidean distance formula, calculate eye aspect ratio (EAR), mouth aspect ratio (MAR) and passes to the threshold value, if EAR and MAR are more than the threshold value then the User is drowsy i.e. Unattentive.
 
-<!-- ![](documentation/images/ProblemDef.PNG) -->
+
 <p align="center">
-  <img width="460" height="300" src="documentation/images/ProblemDef.PNG">
+  <img width="500" height="500" src="documentation/images/ProblemDef.PNG">
 </p>
 
+## Proposed System Architecture
+### Step 1 Data Preparation
 
-You can also:
-  - Import and save files from GitHub, Dropbox, Google Drive and One Drive
-  - Drag and drop markdown and HTML files into Dillinger
-  - Export documents as Markdown, HTML and PDF
+##### cv2.cvtColor()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are more than 150 color-space conversion methods available in OpenCV. we use RGB to Gray conversion. Since RGB image takes 24 bits (8 x 3) while grayscale image takes only 8 bits to store and we are interested in developing a time-eﬃcient system, therefore after capturing the image (RGB image) it is converted into a grayscale image. The intensity of an image is the average of the three color elements, so the grayscale image that represents the original color image can be converted as
+##### cv2.dnn.blobFromImage() 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this step, we use cv2.dnn.blobFromImage() to store the images. a blob is just a potentially collection of images with the same spatial dimensions (i.e., width and height), same depth (number of channels), that have all be preprocessed in the same manner.
 
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
+blob = cv2.dnn.blobFromImage(image, scalefactor=1.0, size, mean, swapRB=True)
+
+### Step 2 Model Definition
+When using OpenCVs deep neural network module with Caﬀe models, well need two sets of ﬁles: 
+1.The .prototxt ﬁle(s) which deﬁne the model architecture (i.e., the layers themselves) of SSD framework based on ResNet Architecture. 
+
+2.The .caﬀemodel ﬁle which contains the weights for the actual layers Both ﬁles are used to detect faces and these detected faces are store into face array. Extracted Faces are as follows:
+
+##### Face array
+<p align="center">
+  <img width="500" height="500" src="documentation/images/face1.PNG">
+</p>
+<p align="center">
+  <img width="500" height="500" src="documentation/images/face2.PNG">
+</p>
+<p align="center">
+  <img width="500" height="500" src="documentation/images/face3.PNG">
+</p>
 
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable

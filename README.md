@@ -37,9 +37,9 @@ Face Array We detect the faces using cv2.dnn.net.forward() which is the class of
 </p>
 
 ## Implementation (Result)
-#### Eye Aspect Ratio (EAR)
+### Eye Aspect Ratio (EAR)
 
-#### Mouth Aspect Ratio
+### Mouth Aspect Ratio
 
 ## Working Model
 Here it is shown UAMS Works for more than 1 individuals as a Drowsiness Detection.

@@ -96,6 +96,16 @@ cd AttetionMonitoring
 $./run.sh
 ```
 
+## Actors In Above Pictures
+
+<p align="center">
+<h6>Rohit Yeram</h6><img width="100" height="100" src="documentation/images/face2.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<h6>Arbaj shaikh</h6><img width="100" height="100" src="documentation/images/face1.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<h6>Rohan Narayane</h6><img width="100" height="100" src="documentation/images/face3.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
+
 ## Licence
 
 This project is licensed under the GNU General Public License v3.0 - see the LICENSE.md file for details
+

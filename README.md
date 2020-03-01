@@ -22,7 +22,8 @@
 blob = cv2.dnn.blobFromImage(image, scalefactor=1.0, size, mean, swapRB=True)
 
 ### Step 2 Model Definition
-When using OpenCVs deep neural network module with Caﬀe models, well need two sets of ﬁles: 
+When using OpenCVs deep neural network module with Caﬀe models, well need two sets of ﬁles:
+
 1.The .prototxt ﬁle(s) which deﬁne the model architecture (i.e., the layers themselves) of SSD framework based on ResNet Architecture. 
 
 2.The .caﬀemodel ﬁle which contains the weights for the actual layers Both ﬁles are used to detect faces and these detected faces are store into face array. Extracted Faces are as follows:
@@ -50,11 +51,5 @@ UAMS uses a number of open source projects to work properly:
 UAMS requires Python 3.6 or heigher to run properly.
 
 Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
 
 

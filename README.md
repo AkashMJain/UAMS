@@ -29,13 +29,13 @@ When using OpenCVs deep neural network module with Caﬀe models, well need two 
 
 ##### Face array
 <p align="center">
-  <img width="500" height="500" src="documentation/images/face1.PNG">
+  <img width="100" height="100" src="documentation/images/face1.png">
 </p>
 <p align="center">
-  <img width="500" height="500" src="documentation/images/face2.PNG">
+  <img width="100" height="100" src="documentation/images/face2.png">
 </p>
 <p align="center">
-  <img width="500" height="500" src="documentation/images/face3.PNG">
+  <img width="100" height="100" src="documentation/images/face3.png">
 </p>
 
 > The overriding design goal for Markdown's

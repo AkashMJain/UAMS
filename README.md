@@ -44,12 +44,29 @@ UAMS uses a number of open source projects to work properly:
 * [DLIB](http://dlib.net/) - For Facial Landmarks detection.
 * [imutils](https://pypi.org/project/imutils/) - For other image related Operation.
 * [numpy](https://numpy.org/) - For Conversion of images to text data or pixel values.
-
+* [scipy](https://www.scipy.org/) - To do EAR and MAR Calculation's
 
 ### Installation
 
 UAMS requires Python 3.6 or heigher to run properly.
 
-Install the dependencies and devDependencies and start the server.
+Install the dependencies to start the project.
 
+* scipy
+`sudo pip install scipy`
 
+* python-opencv
+`sudo pip install python-opencv`
+
+* imutils
+`sudo pip install imutils`
+
+* dlib
+`sudo pip install dlib`
+
+### Run 
+```
+git clone git@github.com:AkashMJain/UAMS.git
+cd AttetionMonitoring
+$./run.sh
+```

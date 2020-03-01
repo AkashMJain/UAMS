@@ -27,7 +27,8 @@ When using OpenCVs deep neural network module with Caﬀe models, well need two 
 
 2.The .caﬀemodel ﬁle which contains the weights for the actual layers Both ﬁles are used to detect faces and these detected faces are store into face array. Extracted Faces are as follows:
 
-##### Face array
+### Step 3 : 
+Face Array We detect the faces using cv2.dnn.net.forward() which is the class of OpenCV module which gives location coordinates of the face region. These coordinates manipulate with np.array() which is a function of NumPy which stands for Numerical Python, is a library consisting of multidimensional array objects and a collection of routines for processing those faces. np.array() lies these point with the actual image. Then, obtained face array hand over to Dlib for further process.
 <p align="center">
   <img width="200" height="200" src="documentation/images/face1.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img width="200" height="200" src="documentation/images/face2.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

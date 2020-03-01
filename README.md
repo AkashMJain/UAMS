@@ -36,6 +36,17 @@ Face Array We detect the faces using cv2.dnn.net.forward() which is the class of
   <img width="200" height="200" src="documentation/images/face3.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
+## Implementation (Result)
+#### Eye Aspect Ratio (EAR)
+
+#### Mouth Aspect Ratio
+
+## Working Model
+Here it is shown UAMS Works for more than 1 individuals as a Drowsiness Detection.
+
+
+
+
 ## Dependencies and Technology Stack
 
 UAMS uses a number of open source projects to work properly:
@@ -46,7 +57,7 @@ UAMS uses a number of open source projects to work properly:
 * [numpy](https://numpy.org/) - For Conversion of images to text data or pixel values.
 * [scipy](https://www.scipy.org/) - To do EAR and MAR Calculation's
 
-### Installation
+## Installation
 
 UAMS requires Python 3.6 or heigher to run properly.
 
@@ -64,7 +75,7 @@ Install the dependencies to start the project.
 * dlib
 `sudo pip install dlib`
 
-### Run 
+## Run 
 ```
 git clone git@github.com:AkashMJain/UAMS.git
 cd AttetionMonitoring

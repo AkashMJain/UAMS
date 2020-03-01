@@ -96,12 +96,12 @@ cd AttetionMonitoring
 $./run.sh
 ```
 
-## Actors In Above Pictures
-
+## Actors In Above Results
+Special thanks to actors who created sample video for testing purposes.
 <p align="center">
-<h6>Rohit Yeram</h6><img width="100" height="100" src="documentation/images/face2.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<h6>Arbaj shaikh</h6><img width="100" height="100" src="documentation/images/face1.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<h6>Rohan Narayane</h6><img width="100" height="100" src="documentation/images/face3.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<p>Rohit Yeram</p><img width="100" height="100" src="documentation/images/face2.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<p>Arbaj Shaikh</p><img width="100" height="100" src="documentation/images/face1.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<p>Rohan Narayane</p><img width="100" height="100" src="documentation/images/face3.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 

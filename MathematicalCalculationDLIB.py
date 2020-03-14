@@ -1,33 +1,19 @@
-# from imutils.video import FileVideoStream
-# from imutils.video import FPS
 from imutils import face_utils
 from scipy.spatial import distance as dist
-
-# import numpy as np
-# import argparse
-# import imutils
-# import time
 import cv2
 import dlib
 
 
 class MathematicalCalculationDLIB(object):
-    """docstring for MathematicalCalculationDLIB"""
-
     def __init__(self):
         super(MathematicalCalculationDLIB, self).__init__()
         self.ctr = 0
         self.detector = dlib.get_frontal_face_detector()
         self.predictor = dlib.shape_predictor('./dlib_weights/shape_predictor_68_face_landmarks.dat')
-
         self.MOUTH_AR_CONSEC_FRAMES = 1
         self.EYE_AR_CONSEC_FRAMES = 1
-
         self.MOUTH_AR_THRESH = 0.09
         self.EYE_AR_THRESH = 0.3
-
-        # self.YAWN = 0
-
         self.COUNTER_1 = 0
         self.COUNTER_2 = 0
 
@@ -36,14 +22,10 @@ class MathematicalCalculationDLIB(object):
         (self.mStart, self.mEnd) = face_utils.FACIAL_LANDMARKS_IDXS["mouth"]
         (self.jStart, self.jEnd) = face_utils.FACIAL_LANDMARKS_IDXS["jaw"]
         (self.nStart, self.nEnd) = face_utils.FACIAL_LANDMARKS_IDXS["nose"]
-        # self.arg = arg
-
-    # def MathematicalCalculationDLIB(self):
 
     def faceMovement(self, leftEye, rightEye, nose):
         A = dist.euclidean(leftEye[0], nose[0])
         B = dist.euclidean(rightEye[3], nose[0])
-
         return A, B
 
     def eyeAspectRatio(self, eye):
@@ -60,14 +42,12 @@ class MathematicalCalculationDLIB(object):
         D3 = dist.euclidean(mouth[15], mouth[17])
         D4 = dist.euclidean(mouth[12], mouth[16])
         mar = (D1 + D2 + D3) / (3.0 * D4)
-
         return mar
 
     def loopOperation(self, frame):
         self.gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         cv2.imshow("test", self.gray)
         rects = self.detector(self.gray, 0)
-
         for rect in rects:
             self.shape = self.predictor(self.gray, rect)
             self.assignValues()
@@ -81,10 +61,8 @@ class MathematicalCalculationDLIB(object):
         return self.gray, val
 
     def assignValues(self):
-
         self.shape = face_utils.shape_to_np(self.shape)
         # eyes
-
         self.leftEye = self.shape[self.lStart:self.lEnd]
         self.rightEye = self.shape[self.rStart:self.rEnd]
         # Mouth
@@ -120,23 +98,3 @@ class MathematicalCalculationDLIB(object):
             return 2
         else:
             return 0
-
-        # # print("in here")
-        # if self.ear < self.EYE_AR_THRESH:
-        #     self.COUNTER_1 += 1
-        #     if self.COUNTER_1 >= self.EYE_AR_CONSEC_FRAMES:
-        #         return 1
-        #     cv2.putText(frame, "Eye Closing Detected!", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        # else:
-        #     self.COUNTER_1 = 0
-        #     return 0
-
-        # if self.mar > self.MOUTH_AR_THRESH:
-        #     self.COUNTER_2 += 1
-        #     if self.COUNTER_2 >= self.MOUTH_AR_CONSEC_FRAMES:
-        #         return 2
-        #     cv2.putText(frame, "Yawining Detected!", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-
-        # else:
-        #     self.COUNTER_2 = 0
-        #     return 0

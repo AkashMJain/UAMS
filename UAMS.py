@@ -16,7 +16,7 @@ class UAMS(object):
     def argument_init(self):
         ap = argparse.ArgumentParser()
         # Video Input
-        ap.add_argument("-v", "--video", required=True, help="path to video file")
+        # ap.add_argument("-v", "--video", required=True, help="path to video file")
         # prototxt file contains resnet model strucure
         ap.add_argument("-p", "--prototxt", required=True, help="path to model")
         # weights for resnet
@@ -27,14 +27,17 @@ class UAMS(object):
 
 
     def UAMS(self):
-        video_file = FileVideoStream(self.args["video"]).start()
-        time.sleep(2.0)
-        fps = FPS().start()
-
-        while video_file.more():
+        # video_file = FileVideoStream(self.args["video"]).start()
+        # time.sleep(2.0)
+        # fps = FPS().start()
+        cap = cv2.VideoCapture(0)
+        # while video_file.more():
+        while True:
             # Converting each frame to matrix of numbers
+            ret, self.frame = cap.read()
+
             try:
-                self.frame = video_file.read()
+                # self.frame = video_file.read()
                 gray = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
                 gray = np.dstack([gray, gray, gray])
 
@@ -51,13 +54,13 @@ class UAMS(object):
                 cv2.imshow("frame-this is main frame", self.frame)
             except Exception as e:
                 print(e)
-            fps.update()
+            # fps.update()
             key = cv2.waitKey(1) & 0xFF
             if key == ord("q"):
                 break
-        fps.stop()
-        print("elapsed time : {:.2f}".format(fps.elapsed()))
-        print("FPS  : {:.2f}".format(fps.fps()))
+        # fps.stop()
+        # print("elapsed time : {:.2f}".format(fps.elapsed()))
+        # print("FPS  : {:.2f}".format(fps.fps()))
 
 
     def calculation(self, startX, y):
@@ -77,6 +80,7 @@ class UAMS(object):
             return "UN-ATTENTIVE WITH EYES CLOSED"
         else:
             return "ATTENTIVE"
+
     def __init__(self):
         super(UAMS, self).__init__()
         self.argument_init()

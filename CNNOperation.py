@@ -16,6 +16,7 @@ class CNNOperation(object):
     def CNNOperation(self, frame, net, args):
         # face array creation is done here caputure each face from video frame and put it into an list.
         faces = []
+        startX, startY, y = None, None, None
         (h, w) = frame.shape[: 2]
         blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)), 1.0, (300, 300), (104.0, 177.0, 123.0))
         net.setInput(blob)

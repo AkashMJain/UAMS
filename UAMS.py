@@ -58,7 +58,7 @@ class UAMS(object):
             key = cv2.waitKey(1) & 0xFF
             if key == ord("q"):
                 break
-        # fps.stop()
+
         # print("elapsed time : {:.2f}".format(fps.elapsed()))
         # print("FPS  : {:.2f}".format(fps.fps()))
 
